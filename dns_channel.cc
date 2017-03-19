@@ -179,7 +179,7 @@ struct query_tail
 }__attribute__((__packed__));
 
 }
-
+// the minimum retransmission interval should be 2-5 seconds
 dns_channel::dns_channel(muduo::net::EventLoop *loop, double timeout)
   : sockfd_(impl::createNonblockingUdpOrDie(AF_INET)),
     loop_(loop),
@@ -194,7 +194,7 @@ dns_channel::dns_channel(muduo::net::EventLoop *loop, double timeout)
     v4_datas_(),
     v6_datas_()
 {
-  // 系统内置dns在127.0.1.1上面监听
+  ///!!! dnsmasq bind address, change according to your system environment
   muduo::net::InetAddress local_dns("127.0.1.1", 53, false);
 
   // connect error, fatal
