@@ -7,7 +7,7 @@
 > this is the play toy I made to make deeper understand of dns protocol 
 
 ### warning
-this project may only support Ubuntu or other systems that install dnsmasq. as showed below, this is the netstat print out of my pc:
+this project may only support Ubuntu or other systems that have installed dnsmasq. as showed below, this is the netstat print out of my pc:
 
 ```
  netstat -apn | grep 53
