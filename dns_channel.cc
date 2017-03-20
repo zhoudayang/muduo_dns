@@ -365,7 +365,8 @@ void dns_channel::handleTimeout(uint16_t transaction_id)
     entry.resolveCallback(muduo::net::InetAddress());
     dns_datas_.erase(transaction_id);
   }
-  resolve(transaction_id, entry);
+  else
+    resolve(transaction_id, entry);
 }
 
 void dns_channel::handleRead(muduo::Timestamp receiveTime)
