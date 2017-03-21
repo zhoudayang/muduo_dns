@@ -358,6 +358,11 @@ void dns_channel::send(muduo::net::Buffer *buf)
 void dns_channel::handleTimeout(uint16_t transaction_id)
 {
   LOG_ERROR <<"transaction_id "<< transaction_id << " timeout, try again!";
+  if(!dns_datas_.count(transaction_id)
+  {
+    LOG_ERROR << "can't find " << transaction_id << " in dns_datas_";
+    return;
+  }
   auto entry = dns_datas_[transaction_id];
   if(++entry.count > MAX_TIMEOUT)
   {
