@@ -2,7 +2,7 @@
 #include <muduo/base/Logging.h>
 #include <boost/bind.hpp>
 
-#include "dns_channel.h"
+#include "dns_resolver.h"
 
 void onResolve(const muduo::net::InetAddress& addr)
 {
@@ -14,23 +14,25 @@ int main()
 
   muduo::net::EventLoop loop;
 
-  zy::dns_channel channel(&loop);
-  channel.resolve("www.baidu.com", boost::bind(&onResolve, _1));
-  channel.resolve("www.qq.com", boost::bind(&onResolve, _1), true);
-  channel.resolve("www.google.com", boost::bind(&onResolve, _1), true);
-  channel.resolve("www.google.com", boost::bind(&onResolve, _1), false);
-  channel.resolve("www.ifeng.com", boost::bind(&onResolve, _1), false);
-  channel.resolve("www.zhihu.com", boost::bind(&onResolve, _1), false);
+  zy::dns_resolver resolver(&loop);
+  resolver.resolve("www.baidu.com", boost::bind(&onResolve, _1));
+  resolver.resolve("www.qq.com", boost::bind(&onResolve, _1), true);
+  resolver.resolve("www.google.com", boost::bind(&onResolve, _1), true);
+  resolver.resolve("www.google.com", boost::bind(&onResolve, _1), false);
+  resolver.resolve("www.ifeng.com", boost::bind(&onResolve, _1), false);
+  resolver.resolve("www.zhihu.com", boost::bind(&onResolve, _1), false);
 
-  channel.resolve("www.baidu.com", boost::bind(&onResolve, _1));
-  channel.resolve("www.qq.com", boost::bind(&onResolve, _1), true);
-  channel.resolve("www.google.com", boost::bind(&onResolve, _1), true);
-  channel.resolve("www.google.com", boost::bind(&onResolve, _1), false);
-  channel.resolve("www.ifeng.com", boost::bind(&onResolve, _1), false);
-  channel.resolve("www.zhihu.com", boost::bind(&onResolve, _1), false);
+  resolver.resolve("www.baidu.com", boost::bind(&onResolve, _1));
+  resolver.resolve("www.qq.com", boost::bind(&onResolve, _1), true);
+  resolver.resolve("www.google.com", boost::bind(&onResolve, _1), true);
+  resolver.resolve("www.google.com", boost::bind(&onResolve, _1), false);
+  resolver.resolve("www.ifeng.com", boost::bind(&onResolve, _1), false);
+  resolver.resolve("www.zhihu.com", boost::bind(&onResolve, _1), false);
 
-  channel.resolve("www.github.com", boost::bind(&onResolve, _1), false);
-  channel.resolve("www.facebook.com", boost::bind(&onResolve, _1), true);
+  resolver.resolve("www.github.com", boost::bind(&onResolve, _1), false);
+  resolver.resolve("www.facebook.com", boost::bind(&onResolve, _1), true);
+  
+  resolver.resolve("www.hao123.com", boost::bind(&onResolve, _1), false);
 
   loop.loop();
 
