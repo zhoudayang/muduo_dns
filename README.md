@@ -15,3 +15,5 @@ this project may only support Ubuntu or other systems that have installed dnsmas
 tcp        0      0 127.0.1.1:53            0.0.0.0:*               LISTEN      1390/dnsmasq    
 udp        0      0 127.0.1.1:53            0.0.0.0:*                           1390/dnsmasq    
 ```
+
+or you should change dns ip to remote name server instead.
